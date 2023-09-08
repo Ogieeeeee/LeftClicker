@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "x7A3Cne5x8albw4XL5FIiolr6fyduPouXdJrkmFzeuURHlBQCkUomC6lKcsNwOCIdFI+O+JmOH9tRAzGRXIkqg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\okell\\Desktop\\Ogie\\Programming\\TD\\Clicker\\LeftClicker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\okell\\.nuget\\packages\\inputsimulator\\1.0.4\\inputsimulator.1.0.4.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'InputSimulator 1.0.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "InputSimulator",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
+}
