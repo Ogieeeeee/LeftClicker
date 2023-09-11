@@ -1,9 +1,4 @@
-using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using WindowsInput;
-
+namespace LeftClicker;
 public class ServerUDP
 {
     public void Start()

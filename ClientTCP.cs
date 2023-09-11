@@ -1,31 +1,31 @@
-using System.Net.Sockets;
-using System.Text;
-
+namespace LeftClicker;
 public class ClientTCP
 {
     // Constants for keys to ignore (e.g., keys with virtual key codes 17 and 16)
+    readonly TcpClient _client;
+    readonly NetworkStream _stream;
+
     private const int VK_IGNORE1 = 0x11; // VK_CONTROL
     private const int VK_IGNORE2 = 0x10; // VK_SHIFT
 
-    // Boolean array to track key states
-    private static bool[] keyStates = new bool[256];
+
+    private static bool[] keyStates = new bool[256]; // Boolean array to track key states
+
+    public ClientTCP(string ipAddress, int port)
+    {
+        _client = new(ipAddress, port);
+        _stream = _client.GetStream();
+    }
 
     public void Start()
     {
-        TcpClient? client = null;
-        NetworkStream? stream = null;
-        try
+        Console.WriteLine("Starting TCP Client ...");
+
+        Console.WriteLine(_client.NoDelay);
+        _client.NoDelay = true; // Experiment if this is better 
+        while (true)
         {
-
-            // Connect to the server
-            string serverIpAddress = "192.168.178.13"; // Replace with the actual IP address of the server
-            int serverPort = 12345; // Use the same port as in the server
-
-            client = new TcpClient(serverIpAddress, serverPort);
-            stream = client.GetStream();
-
-
-            while (true)
+            try
             {
                 // Check the state of each key and mouse button
                 for (int keyCode = 1; keyCode <= 255; keyCode++)
@@ -38,7 +38,7 @@ public class ClientTCP
                         Console.WriteLine($"Key pressed: {keyCode}");
                         string message = $"{keyCode}";
                         byte[] data = Encoding.ASCII.GetBytes(message);
-                        stream.Write(data, 0, data.Length);
+                        _stream.Write(data, 0, data.Length);
                     }
 
                     // Update key state
@@ -48,18 +48,11 @@ public class ClientTCP
                 // Add a small delay to avoid high CPU usage
                 System.Threading.Thread.Sleep(10);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-        }
-        finally
-        {
-            //cleanup
-            stream?.Close();
-            client?.Close();
-        }
-
     }
-
 }
+

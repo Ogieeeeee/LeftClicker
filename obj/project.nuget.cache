@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "Dg/BFv06IZiCSCMAo4sO6y9qsU0ERZEjV0WHwTJ1/nGa5EzO+eUesQYbzT1s/8aguT0AhxaR3Hs6HmIpUSAGLA==",
+  "dgSpecHash": "N8Hab2fzBIjnia8rkwY0rRnSjC7O/svqG7pgfjv/JNIGKobR4XrKSy94vCN5nPvyr3F219j7iKuOHLtvrgc5MA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\okell\\Desktop\\TD\\Clicker\\Client\\client.csproj",
+  "projectFilePath": "C:\\Users\\okell\\Desktop\\Ogie\\Programming\\TD\\Clicker\\LeftClicker.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\okell\\.nuget\\packages\\inputsimulator\\1.0.4\\inputsimulator.1.0.4.nupkg.sha512"
+    "C:\\Users\\okell\\.nuget\\packages\\inputsimulator\\1.0.4\\inputsimulator.1.0.4.nupkg.sha512",
+    "C:\\Users\\okell\\.nuget\\packages\\microsoft.net.illink.analyzers\\7.0.100-1.23211.1\\microsoft.net.illink.analyzers.7.0.100-1.23211.1.nupkg.sha512",
+    "C:\\Users\\okell\\.nuget\\packages\\microsoft.net.illink.tasks\\7.0.100-1.23211.1\\microsoft.net.illink.tasks.7.0.100-1.23211.1.nupkg.sha512",
+    "C:\\Users\\okell\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.14\\microsoft.netcore.app.runtime.win-x64.7.0.14.nupkg.sha512",
+    "C:\\Users\\okell\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.14\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.14.nupkg.sha512",
+    "C:\\Users\\okell\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.14\\microsoft.aspnetcore.app.runtime.win-x64.7.0.14.nupkg.sha512"
   ],
   "logs": [
     {
