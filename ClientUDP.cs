@@ -1,19 +1,14 @@
 namespace LeftClicker;
 public class ClientUDP
 {
-    readonly UdpClient _udpClient;
-
-
-    // Constants for keys to ignore (e.g., keys with virtual key codes 17 and 16)
-    private const int VK_IGNORE1 = 0x11; // VK_CONTROL
-    private const int VK_IGNORE2 = 0x10; // VK_SHIFT
-
-    // Boolean array to track key states
-    private static bool[] keyStates = new bool[256];
+    private readonly UdpClient _udpClient;
+    private readonly List<VKeys> _allowedKeys;
+    private static readonly bool[] keyStates = new bool[256]; // Boolean array to track key states
 
     public ClientUDP(string ipAddress, int port)
     {
         _udpClient = new(ipAddress, port);
+        _allowedKeys = VirtualKeyHelper.AllowedKeys(VirtualKeyHelper.GetUserClickMode());
     }
 
     public void Start()
@@ -27,7 +22,7 @@ public class ClientUDP
                 {
                     bool keyState = (Win32Helper.GetAsyncKeyState(keyCode) & 0x8000) != 0;
 
-                    if (!keyStates[keyCode] && keyState && keyCode != VK_IGNORE1 && keyCode != VK_IGNORE2)
+                    if (!keyStates[keyCode] && keyState && _allowedKeys.Contains((VKeys)keyCode))
                     {
                         // Print the key press event (excluding ignored keys)
                         Console.WriteLine($"Key pressed: {keyCode}");

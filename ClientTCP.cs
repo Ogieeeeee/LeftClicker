@@ -1,27 +1,22 @@
 namespace LeftClicker;
 public class ClientTCP
 {
-    // Constants for keys to ignore (e.g., keys with virtual key codes 17 and 16)
-    readonly TcpClient _client;
-    readonly NetworkStream _stream;
-
-    private const int VK_IGNORE1 = 0x11; // VK_CONTROL
-    private const int VK_IGNORE2 = 0x10; // VK_SHIFT
-
-
-    private static bool[] keyStates = new bool[256]; // Boolean array to track key states
+    private readonly TcpClient _client;
+    private readonly NetworkStream _stream;
+    private readonly List<VKeys> _allowedKeys;
+    private static readonly bool[] keyStates = new bool[256]; // Boolean array to track key states
 
     public ClientTCP(string ipAddress, int port)
     {
         _client = new(ipAddress, port);
         _stream = _client.GetStream();
+        _allowedKeys = VirtualKeyHelper.AllowedKeys(VirtualKeyHelper.GetUserClickMode());
     }
 
     public void Start()
     {
         Console.WriteLine("Starting TCP Client ...");
 
-        Console.WriteLine(_client.NoDelay);
         _client.NoDelay = true; // Experiment if this is better 
         while (true)
         {
@@ -32,7 +27,7 @@ public class ClientTCP
                 {
                     bool keyState = (Win32Helper.GetAsyncKeyState(keyCode) & 0x8000) != 0;
 
-                    if (!keyStates[keyCode] && keyState && keyCode != VK_IGNORE1 && keyCode != VK_IGNORE2)
+                    if (!keyStates[keyCode] && keyState && _allowedKeys.Contains((VKeys)keyCode))
                     {
                         // Print the key press event (excluding ignored keys)
                         Console.WriteLine($"Key pressed: {keyCode}");

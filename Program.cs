@@ -21,41 +21,44 @@ class Program
         Console.WriteLine("4: Server UDP");
     }
 
-    private static string GetUserServiceChoice()
-    {
-        var userServiceChoice = Console.ReadLine();
 
-        while (string.IsNullOrWhiteSpace(userServiceChoice))
+    private static Service GetUserServiceChoice()
+    {
+        var userServiceChoice = Service.TCPClient;
+        var isValidAnswer = false;
+
+        while (!isValidAnswer)
         {
-            userServiceChoice = Console.ReadLine();
+            if (Enum.TryParse(Console.ReadLine(), out userServiceChoice))
+            {
+                isValidAnswer = true;
+            }
         }
 
         return userServiceChoice;
     }
 
-    private static void RunServerOrClient(string userChoice)
+    private static void RunServerOrClient(Service userChoice)
     {
         switch (userChoice)
         {
-            case "1":
+            case Service.TCPClient:
                 ClientTCP cTCP = new(IP_ADDRESS, SERVER_PORT);
                 cTCP.Start();
                 break;
-            case "2":
+            case Service.UDPClient:
                 ClientUDP cUDP = new(IP_ADDRESS, SERVER_PORT);
                 cUDP.Start();
                 break;
-            case "3":
+            case Service.TCPServer:
                 ServerTCP sTCP = new();
                 sTCP.Start();
                 break;
-            case "4":
+            case Service.UDPServer:
                 ServerUDP sUDP = new();
                 sUDP.Start();
                 break;
-
         }
     }
-
 
 }
