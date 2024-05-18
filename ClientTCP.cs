@@ -3,7 +3,7 @@ public class ClientTCP
 {
     private readonly TcpClient _client;
     private readonly NetworkStream _stream;
-    private readonly List<VKeys> _allowedKeys;
+    private List<VKeys> _allowedKeys;
     private static readonly bool[] keyStates = new bool[256]; // Boolean array to track key states
 
     public ClientTCP(string ipAddress, int port)
@@ -17,7 +17,14 @@ public class ClientTCP
     {
         Console.WriteLine("Starting TCP Client ...");
 
-        _client.NoDelay = true; // Experiment if this is better 
+        Task.Run(() =>
+        {
+            while (true)
+            {
+                _allowedKeys = VirtualKeyHelper.AllowedKeys(VirtualKeyHelper.GetUserClickMode());
+            }
+        });
+
         while (true)
         {
             try
